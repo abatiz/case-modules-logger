@@ -7,12 +7,12 @@ Responsable: [Miguel Herrero](https://github.com/Miguel-Herrero)
 
 ## Instalación
 
-Instala la dependencia en `package.json`:
+Instala la dependencia en `package.json` con la `VERSIÓN` que quieras:
 
 ```
 "dependencies": {
-    "case-logger": "git+https://707d3242d7f4d30295f57d7914148ac6524408ba:x-oauth-basic@github.com/abatiz/case-modules-logger.git#VERSIÓN"
-  }
+  "case-logger": "git+https://707d3242d7f4d30295f57d7914148ac6524408ba:x-oauth-basic@github.com/abatiz/case-modules-logger.git#VERSIÓN"
+}
 ```
 
 Importa el módulo y asígnale un `namespace` identificativo para tu script:
