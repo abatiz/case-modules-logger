@@ -1,0 +1,13 @@
+language: node_js
+
+node_js:
+  - 6
+  - 5
+
+build:
+  ci:
+    - mkdir -p shippable/codecoverage
+    - mkdir -p shippable/testresults
+    - npm install
+    - npm run shippable-test
+    - npm run shippable-coverage
