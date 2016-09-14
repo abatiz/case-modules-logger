@@ -2,6 +2,9 @@ var debug = require('debug')
 var request = require('./lib/request.js')
 var gelfFormatter = require('./lib/gelfFormatter.js')
 
+/**
+ *@module {main} Logger
+ */
 var Logger = function Logger (options) {
   // Build module Options object
   var moduleOptions = {}
