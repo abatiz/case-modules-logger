@@ -91,7 +91,7 @@ var stackTraceExample = 'Error: Things keep happening! at /home/gbusey/file.js:5
 /**
  * If no options are passed, default Graylog is used
  */
-var LogWithoutOptions = require('./index.js')('myApp:myScript')
+var LogWithoutOptions = require('case-logger')('myApp:myScript')
 
 LogWithoutOptions.error('Alert: action must be taken immediately', stackTraceExample)
 LogWithoutOptions.warn('Warning: warning conditions')
