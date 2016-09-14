@@ -26,7 +26,7 @@ var Logger = function Logger (options) {
   // Public methods
   var API = {
     error: function logError (shortMessage, ...fullMessage) {
-      var formattedMessage = gelfFormatter('error', moduleOptions.namespace, shortMessage, fullMessage.join(''))
+      var formattedMessage = gelfFormatter('error', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -37,7 +37,7 @@ var Logger = function Logger (options) {
     },
 
     warn: function logWarn (shortMessage, ...fullMessage) {
-      var formattedMessage = gelfFormatter('warn', moduleOptions.namespace, shortMessage, fullMessage.join(''))
+      var formattedMessage = gelfFormatter('warn', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -48,7 +48,7 @@ var Logger = function Logger (options) {
     },
 
     log: function logLog (shortMessage, ...fullMessage) {
-      var formattedMessage = gelfFormatter('log', moduleOptions.namespace, shortMessage, fullMessage.join(''))
+      var formattedMessage = gelfFormatter('log', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -59,7 +59,7 @@ var Logger = function Logger (options) {
     },
 
     info: function logInfo (shortMessage, ...fullMessage) {
-      var formattedMessage = gelfFormatter('info', moduleOptions.namespace, shortMessage, fullMessage.join(''))
+      var formattedMessage = gelfFormatter('info', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -70,7 +70,7 @@ var Logger = function Logger (options) {
     },
 
     debug: function logInfo (shortMessage, ...fullMessage) {
-      var formattedMessage = gelfFormatter('debug', moduleOptions.namespace, shortMessage, fullMessage.join(''))
+      var formattedMessage = gelfFormatter('debug', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       return DEBUG(formattedMessage.short_message)
     }
