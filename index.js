@@ -1,7 +1,20 @@
+/**
+ * Reporta logs a Graylog y muestra por consola al estilo Debug.
+ * @module case-logger
+ */
 var debug = require('debug')
 var request = require('./lib/request.js')
 var gelfFormatter = require('./lib/gelfFormatter.js')
 
+/**
+ * @summary Interfaz con los métodos que se pueden usar para loguear.
+ * @access public
+ * @description Según el nivel de log que se quiera usar, hay distintos métodos disponibles. Todos ellos menos el nivel <i>debug</i> envían a Graylog.
+ * @param {String|Object} options Opciones de inicialización del módulo. (Si sólo se pasa un string, será el <code>namespace</code>)
+ * @param {String} options.namespace El identificador del script que llama al Logger.
+ * @param {Boolean} options.logger (Opcional) Si enviar el mensaje a Graylog o no.
+ * @return {API} La salida en consola, al estilo Debug.
+ */
 var Logger = function Logger (options) {
   // Build module Options object
   var moduleOptions = {}
@@ -80,3 +93,24 @@ var Logger = function Logger (options) {
 }
 
 module.exports = Logger
+
+/**
+ * @typedef {Object} API
+ * @access public
+ * @summary Los métodos de Logger que se pueden usar.
+ * @property {APIFunc} error Loguear y enviar mensajes de nivel <b>error</b>.
+ * @property {APIFunc} warn Loguear y enviar mensajes de nivel <b>warning</b>.
+ * @property {APIFunc} log Loguear y enviar mensajes de nivel <b>log</b>.
+ * @property {APIFunc} info Loguear y enviar mensajes de nivel <b>info</b>.
+ * @property {APIFunc} debug Loguear mensajes de nivel <b>debug</b>. <u>No se envían nunca a Graylog</u>.
+ */
+
+/**
+ * @typedef {Function} APIFunc
+ * @access public
+ * @summary Cada método que se puede usar en el Logger.
+ * @description Aceptan strings que servirán para imprimirse en consola y enviarse a Graylog.
+ * @property {string} shortMessage A short descriptive message; MUST be set by client library.
+ * @property {string} fullMessage A long message that can i.e. contain a backtrace; optional.
+ * @return {undefined} El mensaje en consola, al estilo DEBUG.
+ */
