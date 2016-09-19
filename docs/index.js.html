@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>case-logger Source: index.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.united.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">case-logger</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="modules.list.html" class="dropdown-toggle" data-toggle="dropdown">Modules<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="module-case-logger.html">case-logger</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#gelfFormatter">gelfFormatter</a></li><li><a href="global.html#request">request</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: index.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/**
+ * Reporta logs a Graylog y muestra por consola al estilo Debug.
+ * @module case-logger
+ */
+var debug = require('debug')
+var request = require('./lib/request.js')
+var gelfFormatter = require('./lib/gelfFormatter.js')
+
+/**
+ * @summary Interfaz con los métodos que se pueden usar para loguear.
+ * @access public
+ * @description Según el nivel de log que se quiera usar, hay distintos métodos disponibles. Todos ellos menos el nivel &lt;i>debug&lt;/i> envían a Graylog.
+ * @param {String|Object} options Opciones de inicialización del módulo. (Si sólo se pasa un string, será el &lt;code>namespace&lt;/code>)
+ * @param {String} options.namespace El identificador del script que llama al Logger.
+ * @param {Boolean} options.logger (Opcional) Si enviar el mensaje a Graylog o no.
+ * @return {API} La salida en consola, al estilo Debug.
+ */
+var Logger = function Logger (options) {
+  // Build module Options object
+  var moduleOptions = {}
+
+  if (typeof options !== 'string') {
+    Object.assign(moduleOptions, options)
+  } else {
+    moduleOptions.namespace = options
+  }
+
+  if (!moduleOptions.namespace) {
+    throw new Error('Namespace no definido en las opciones')
+  }
+
+  // Instantiate each constructor and cache them for performance boost
+  var ERROR = debug(moduleOptions.namespace + ':error')
+  var WARN = debug(moduleOptions.namespace + ':warn')
+  var LOG = debug(moduleOptions.namespace + ':log')
+  var INFO = debug(moduleOptions.namespace + ':info')
+  var DEBUG = debug(moduleOptions.namespace + ':debug')
+
+  // Public methods
+  var API = {
+    error: function logError (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('error', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
+
+      /* istanbul ignore else */
+      if (moduleOptions.logger !== false) {
+        request(formattedMessage, function () {})
+      }
+
+      return ERROR(formattedMessage.short_message)
+    },
+
+    warn: function logWarn (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('warn', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
+
+      /* istanbul ignore else */
+      if (moduleOptions.logger !== false) {
+        request(formattedMessage, function () {})
+      }
+
+      return WARN(formattedMessage.short_message)
+    },
+
+    log: function logLog (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('log', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
+
+      /* istanbul ignore else */
+      if (moduleOptions.logger !== false) {
+        request(formattedMessage, function () {})
+      }
+
+      return LOG(formattedMessage.short_message)
+    },
+
+    info: function logInfo (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('info', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
+
+      /* istanbul ignore else */
+      if (moduleOptions.logger !== false) {
+        request(formattedMessage, function () {})
+      }
+
+      return INFO(formattedMessage.short_message)
+    },
+
+    debug: function logInfo (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('debug', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
+
+      return DEBUG(formattedMessage.short_message)
+    }
+  }
+
+  return API
+}
+
+module.exports = Logger
+
+/**
+ * @typedef {Object} API
+ * @access public
+ * @summary Los métodos de Logger que se pueden usar.
+ * @property {APIFunc} error Loguear y enviar mensajes de nivel &lt;b>error&lt;/b>.
+ * @property {APIFunc} warn Loguear y enviar mensajes de nivel &lt;b>warning&lt;/b>.
+ * @property {APIFunc} log Loguear y enviar mensajes de nivel &lt;b>log&lt;/b>.
+ * @property {APIFunc} info Loguear y enviar mensajes de nivel &lt;b>info&lt;/b>.
+ * @property {APIFunc} debug Loguear mensajes de nivel &lt;b>debug&lt;/b>. &lt;u>No se envían nunca a Graylog&lt;/u>.
+ */
+
+/**
+ * @typedef {Function} APIFunc
+ * @access public
+ * @summary Cada método que se puede usar en el Logger.
+ * @description Aceptan strings que servirán para imprimirse en consola y enviarse a Graylog.
+ * @property {string} shortMessage A short descriptive message; MUST be set by client library.
+ * @property {string} fullMessage A long message that can i.e. contain a backtrace; optional.
+ * @return {undefined} El mensaje en consola, al estilo DEBUG.
+ */
+</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+	<span class="copyright">
+	Copyright © 2016 Case on it SL
+	</span>
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.1</a>
+	
+		on 2016-09-19T09:49:33+02:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
