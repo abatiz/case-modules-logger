@@ -38,8 +38,8 @@ var Logger = function Logger (options) {
 
   // Public methods
   var API = {
-    error: function logError (shortMessage, fullMessage) {
-      var formattedMessage = gelfFormatter('error', moduleOptions.namespace, shortMessage, fullMessage)
+    error: function logError (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('error', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -49,8 +49,8 @@ var Logger = function Logger (options) {
       return ERROR(formattedMessage.short_message)
     },
 
-    warn: function logWarn (shortMessage, fullMessage) {
-      var formattedMessage = gelfFormatter('warn', moduleOptions.namespace, shortMessage, fullMessage)
+    warn: function logWarn (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('warn', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -60,8 +60,8 @@ var Logger = function Logger (options) {
       return WARN(formattedMessage.short_message)
     },
 
-    log: function logLog (shortMessage, fullMessage) {
-      var formattedMessage = gelfFormatter('log', moduleOptions.namespace, shortMessage, fullMessage)
+    log: function logLog (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('log', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -71,8 +71,8 @@ var Logger = function Logger (options) {
       return LOG(formattedMessage.short_message)
     },
 
-    info: function logInfo (shortMessage, fullMessage) {
-      var formattedMessage = gelfFormatter('info', moduleOptions.namespace, shortMessage, fullMessage)
+    info: function logInfo (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('info', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       /* istanbul ignore else */
       if (moduleOptions.logger !== false) {
@@ -82,8 +82,8 @@ var Logger = function Logger (options) {
       return INFO(formattedMessage.short_message)
     },
 
-    debug: function logInfo (shortMessage, fullMessage) {
-      var formattedMessage = gelfFormatter('debug', moduleOptions.namespace, shortMessage, fullMessage)
+    debug: function logInfo (shortMessage, ...fullMessage) {
+      var formattedMessage = gelfFormatter('debug', moduleOptions.namespace, shortMessage, fullMessage.join(' '))
 
       return DEBUG(formattedMessage.short_message)
     }
