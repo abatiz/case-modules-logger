@@ -15,14 +15,17 @@
     "node": ">=6.0.0"
   },
   "devDependencies": {
+    "add-jsdocs-here": "^0.1.1",
     "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-jsdoc3": "^0.3.0",
     "istanbul": "^0.4.4",
     "mocha": "^3.0.2",
     "mocha-junit-reporter": "^1.12.0",
     "mocha-standard": "^1.0.0",
     "npm-check-updates": "^2.8.0",
     "sinon": "^1.17.5",
-    "standard": "^7.1.2"
+    "standard": "^8.0.0"
   },
   "scripts": {
     "test": "mocha",
