@@ -38,7 +38,9 @@
     "type": "git",
     "url": "git+https://github.com/abatiz/case-modules.git"
   },
-  "private": true,
+   "publishConfig":{
+    "registry": "https://tools.caseonit.net/npm"
+  },
   "author": "Miguel Herrero <miguel@caseonit.com>",
   "license": "GPL-3.0",
   "bugs": {
