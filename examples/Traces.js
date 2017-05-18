@@ -1,6 +1,6 @@
 'use strict';
 
-const Logger = require( '../' )( 'TracingExample' , {useGelfLib: false});
+const Logger = require( '../' )( 'TracingExample', {useGelfLib: true} );
 
 const trace = Logger.trace('Trace title');
 trace.info( 'This is the first message' );
