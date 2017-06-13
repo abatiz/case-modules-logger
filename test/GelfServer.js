@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 /**
  * This is a dummy gelf server. Useful for testing purposes
  */
