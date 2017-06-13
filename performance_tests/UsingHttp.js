@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 /**
  * This file will start a loop that sends messages to graylog using the
  * > HTTP
@@ -14,8 +14,8 @@
  * `DEBUG=* node UsingGelf.js`
  */
 
-const Logger = require('../')({namespace: 'PerformanceTest - HTTP', useGelfLib: false});
+const Logger = require('../')({namespace: 'PerformanceTest - HTTP', useGelfLib: false})
 
-const ExecuteTest = require('./executeTest');
+const ExecuteTest = require('./executeTest')
 
-ExecuteTest(Logger, 'HTTP');
+ExecuteTest(Logger, 'HTTP')

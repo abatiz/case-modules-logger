@@ -18,6 +18,12 @@
   "devDependencies": {
     "add-jsdocs-here": "^0.1.1",
     "chai": "^3.5.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
     "gulp": "^3.9.1",
     "gulp-jsdoc3": "^0.3.0",
     "istanbul": "^0.4.4",
