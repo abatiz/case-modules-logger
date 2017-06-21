@@ -10,7 +10,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Date.now()
+      timestamp: Date.now() / 1000
     }
 
     expect(gelfFormatter(null, 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -23,7 +23,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Date.now()
+      timestamp: Date.now() / 1000
     }
 
     expect(gelfFormatter('error', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -36,7 +36,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Date.now()
+      timestamp: Date.now() / 1000
     }
 
     expect(gelfFormatter('warn', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -49,7 +49,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Date.now()
+      timestamp: Date.now() / 1000
     }
 
     expect(gelfFormatter('log', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -62,7 +62,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Date.now()
+      timestamp: Date.now() / 1000
     }
 
     expect(gelfFormatter('info', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -75,7 +75,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Date.now()
+      timestamp: Date.now() / 1000
     }
 
     expect(gelfFormatter('debug', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -88,7 +88,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'My full message is populated',
       hostname: require('os').hostname(),
-      timestamp: Date.now()
+      timestamp: Date.now() / 1000
     }
 
     expect(gelfFormatter('debug', 'myApp', 'My log', 'My full message is populated')).to.deep.equal(expectedGELFMessage)
