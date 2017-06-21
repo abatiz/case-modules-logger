@@ -1,6 +1,6 @@
 {
   "name": "case-logger",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Módulo de registro de logs",
   "main": "index.js",
   "directories": {
