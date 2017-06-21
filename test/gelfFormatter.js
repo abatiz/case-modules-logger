@@ -8,9 +8,9 @@ describe('GELF formatter', function () {
       namespace: 'myApp',
       level: 1,
       short_message: 'My log',
-      full_message: undefined,
+      full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Math.round(new Date() / 1000)
+      timestamp: Date.now()
     }
 
     expect(gelfFormatter(null, 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -21,9 +21,9 @@ describe('GELF formatter', function () {
       namespace: 'myApp',
       level: 1,
       short_message: 'My log',
-      full_message: undefined,
+      full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Math.round(new Date() / 1000)
+      timestamp: Date.now()
     }
 
     expect(gelfFormatter('error', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -34,9 +34,9 @@ describe('GELF formatter', function () {
       namespace: 'myApp',
       level: 4,
       short_message: 'My log',
-      full_message: undefined,
+      full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Math.round(new Date() / 1000)
+      timestamp: Date.now()
     }
 
     expect(gelfFormatter('warn', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -47,9 +47,9 @@ describe('GELF formatter', function () {
       namespace: 'myApp',
       level: 5,
       short_message: 'My log',
-      full_message: undefined,
+      full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Math.round(new Date() / 1000)
+      timestamp: Date.now()
     }
 
     expect(gelfFormatter('log', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -60,9 +60,9 @@ describe('GELF formatter', function () {
       namespace: 'myApp',
       level: 6,
       short_message: 'My log',
-      full_message: undefined,
+      full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Math.round(new Date() / 1000)
+      timestamp: Date.now()
     }
 
     expect(gelfFormatter('info', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -73,9 +73,9 @@ describe('GELF formatter', function () {
       namespace: 'myApp',
       level: 7,
       short_message: 'My log',
-      full_message: undefined,
+      full_message: 'No full message',
       hostname: require('os').hostname(),
-      timestamp: Math.round(new Date() / 1000)
+      timestamp: Date.now()
     }
 
     expect(gelfFormatter('debug', 'myApp', 'My log')).to.deep.equal(expectedGELFMessage)
@@ -88,7 +88,7 @@ describe('GELF formatter', function () {
       short_message: 'My log',
       full_message: 'My full message is populated',
       hostname: require('os').hostname(),
-      timestamp: Math.round(new Date() / 1000)
+      timestamp: Date.now()
     }
 
     expect(gelfFormatter('debug', 'myApp', 'My log', 'My full message is populated')).to.deep.equal(expectedGELFMessage)

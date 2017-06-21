@@ -105,13 +105,13 @@ Ejecútalo con `DEBUG=* node example.js` y verás en Graylog los datos enviados.
 
 La información que se recibe en Graylog es:
 
-0. timestamp (cuándo se envió el log)
-0. hostname (quién generó el log)
-0. source (la IP de quien generó el log)
-0. level (nivel de criticidad, de acuerdo con los *Niveles de log* según el método usado)
-0. namespace (el script que generó el log)
-0. message (título del log)
-0. full_message (si lo hay, mensaje completo del log)
+0. `timestamp` (cuándo se envió el log, timestamp en milisegundos)
+0. `hostname` (quién generó el log)
+0. `source` (la IP de quien generó el log)
+0. `level` (nivel de criticidad, de acuerdo con los [*Niveles de log*](#niveles-de-log) según el método usado)
+0. `namespace` (el script que generó el log, prefijado por el proyecto —ej. `metrics-probe`—)
+0. `message` (título del log)
+0. `full_message` (OPCIONAL. Si lo hay, mensaje completo del log)
 
 ## Contribuciones
 
