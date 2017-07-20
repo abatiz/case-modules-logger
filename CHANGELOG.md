@@ -1,5 +1,25 @@
 # Change Log
 
+## [v1.5.0](https://github.com/abatiz/case-modules-logger/tree/v1.5.0) (2017-07-20)
+[Full Changelog](https://github.com/abatiz/case-modules-logger/compare/v1.4.0...v1.5.0)
+
+**Implemented enhancements:**
+
+- Habilitar puertos distintos para UDP [\#21](https://github.com/abatiz/case-modules-logger/issues/21)
+- Posibilidad de usar funciones de envío síncronas o aceptar callbacks [\#15](https://github.com/abatiz/case-modules-logger/issues/15)
+- Use different ports for HTTP and UDP [\#22](https://github.com/abatiz/case-modules-logger/pull/22) ([Miguel-Herrero](https://github.com/Miguel-Herrero))
+- Release v1.4 [\#17](https://github.com/abatiz/case-modules-logger/pull/17) ([Miguel-Herrero](https://github.com/Miguel-Herrero))
+
+**Fixed bugs:**
+
+- Return to decimal millisecs [\#19](https://github.com/abatiz/case-modules-logger/pull/19) ([Miguel-Herrero](https://github.com/Miguel-Herrero))
+
+**Merged pull requests:**
+
+- UDP&HTTP ports [\#23](https://github.com/abatiz/case-modules-logger/pull/23) ([Miguel-Herrero](https://github.com/Miguel-Herrero))
+- Master [\#20](https://github.com/abatiz/case-modules-logger/pull/20) ([Miguel-Herrero](https://github.com/Miguel-Herrero))
+- Release v1.4 into develop [\#18](https://github.com/abatiz/case-modules-logger/pull/18) ([Miguel-Herrero](https://github.com/Miguel-Herrero))
+
 ## [v1.4.0](https://github.com/abatiz/case-modules-logger/tree/v1.4.0) (2017-06-21)
 [Full Changelog](https://github.com/abatiz/case-modules-logger/compare/v1.3.0...v1.4.0)
 
