@@ -39,7 +39,7 @@
     "test": "mocha",
     "coverage": "istanbul cover --report cobertura _mocha",
     "ncu": "ncu",
-    "shippable-test": "mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./shippable/testresults/test-results.xml",
+    "shippable-test": "USE_FULL_SUITE_TITLE=true mocha test --reporter mocha-junit-reporter --reporter-options mochaFile=./shippable/testresults/test-results.xml",
     "shippable-coverage": "istanbul cover --report cobertura --dir ./shippable/codecoverage _mocha"
   },
   "repository": {
